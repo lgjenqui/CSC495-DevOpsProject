@@ -10,7 +10,7 @@ module.exports = {
         node: true
       },
       files: [
-        '.eslintrc.{js,cjs}'
+        '**/*.js'
       ],
       parserOptions: {
         sourceType: 'script'
@@ -22,10 +22,6 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
-  },
-  override: [
-    {
-      files: ['**/*.js'],
-    },
-  ],
-};
+    semi: 0
+  }
+}
