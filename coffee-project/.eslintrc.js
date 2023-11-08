@@ -22,5 +22,10 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
-  }
-}
+  },
+  override: [
+    {
+      files: ['**/*.js'],
+    },
+  ],
+};
