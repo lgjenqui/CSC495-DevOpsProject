@@ -23,12 +23,10 @@ jobs:
       with:
         node-version: 14
 
-    - name: Set working directory
-      run: cd coffee-project
-      working-directory: coffee-project
-      
     - name: Install Dependencies
+      working-directory: ./coffee-maker
       run: npm install
 
     - name: Run ESLint
+      working-directory: ./coffee-maker
       run: npm run lint
