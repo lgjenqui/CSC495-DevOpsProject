@@ -1,0 +1,22 @@
+name: canary-release
+on:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: 'Target Branch for PR'
+        required: true
+        default: 'release*'
+jobs:
+  build:
+    name: Build Release Docker Image
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+  
+  canary-deploy:
+    name: Begin Canary Deployment
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3

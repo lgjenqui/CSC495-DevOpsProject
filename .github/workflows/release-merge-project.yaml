@@ -1,0 +1,7 @@
+name: dev-merge-project
+on:
+  pull_request
+    branch: release*
+jobs:
+  common-vulnerability:
+    uses: ./.github/workflows/common-vulnerability-job.yaml
