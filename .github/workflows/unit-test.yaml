@@ -29,5 +29,5 @@ jobs:
         working-directory: coffee-project
         run: npm run test
 
-      # - name: Upload coverage to Codecov
-      #   uses: codecov/codecov-action@v4
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
