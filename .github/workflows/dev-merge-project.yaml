@@ -27,3 +27,5 @@ jobs:
 
   common-vulnerability:
     uses: ./.github/workflows/common-vulnerability-job.yaml
+    with:
+      workflow-event: common-vulnerability-job-trigger
