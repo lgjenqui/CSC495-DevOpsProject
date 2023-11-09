@@ -18,12 +18,14 @@ jobs:
 
       - name: Use Node.js
         uses: actions/setup-node@v3
+        with:
+          node-version: 16
 
       - name: Install dependencies
         run: npm install
 
       - name: Run unit tests
-        run: npm test
+        run: npm run test
 
       # - name: Upload coverage to Codecov
       #   uses: codecov/codecov-action@v4
