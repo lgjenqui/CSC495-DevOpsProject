@@ -28,5 +28,8 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
+    - name: Debug ESLint Command
+      run: npm run lint --dir test --dir public
+
     - name: Run ESLint
       run: npm run lint
