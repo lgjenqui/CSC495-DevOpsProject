@@ -1,6 +1,6 @@
 name: dev-merge-project
 on:
-  pull_request
+  pull_request:
     branch: dev
 jobs:
   lint:
