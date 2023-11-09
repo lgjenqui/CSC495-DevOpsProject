@@ -10,7 +10,7 @@ on:
       - feature-*
 defaults:
       run:
-        working-directory: ./coffee-projecta
+        working-directory: coffee-project
 jobs:
   lint:
     name: ESLint Check
