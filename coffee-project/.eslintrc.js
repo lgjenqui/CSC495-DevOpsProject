@@ -4,7 +4,6 @@ module.exports = {
         es2021: true,
         mocha: true
     },
-    ignorePatterns: ["node_modules/"],
     extends: 'standard',
     overrides: [
         {
