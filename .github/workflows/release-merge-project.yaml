@@ -3,7 +3,13 @@ on:
   pull_request:
     branch: release*
 jobs:
-  common-vulnerability:
-    uses: ./.github/workflows/common-vulnerability-job.yaml
-    with:
-      workflow-event: common-vulnerability-job-trigger
+  temp:
+    name: temp
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+  # common-vulnerability:
+  #   uses: ./.github/workflows/common-vulnerability-job.yaml
+#     with:
+#       workflow-event: common-vulnerability-job-trigger
