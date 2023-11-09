@@ -6,7 +6,7 @@ module.exports = {
     },
     ignorePatterns: [
         '*/node_modules/**/*'
-      ],
+    ],
     extends: 'standard',
     overrides: [
         {
