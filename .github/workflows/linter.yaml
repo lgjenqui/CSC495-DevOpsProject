@@ -27,11 +27,6 @@ jobs:
       working-directory: coffee-project
       run: npm install
 
-    - name: Set ECMAScript Version
-      working-directory: coffee-project
-      run: |
-        echo '{"parserOptions": {"ecmaVersion": 12}}' > .eslintrc.json
-
     - name: Run ESLint
       working-directory: coffee-project
       run: npm run lint
