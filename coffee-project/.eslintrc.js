@@ -19,7 +19,7 @@ module.exports = {
         }
     ],
     parserOptions: {
-        ecmaVersion: 2023,
+        ecmaVersion: 6,
         sourceType: 'module'
     },
     rules: {
