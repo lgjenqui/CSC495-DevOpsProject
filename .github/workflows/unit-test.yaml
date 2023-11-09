@@ -22,9 +22,11 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
+        working-directory: coffee-project
         run: npm install
 
       - name: Run unit tests
+        working-directory: coffee-project
         run: npm run test
 
       # - name: Upload coverage to Codecov
