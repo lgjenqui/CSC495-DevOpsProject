@@ -6,6 +6,7 @@ on:
         description: 'Target Branch for PR'
         required: true
         default: 'main'
+
 jobs:
   deploy:
     name: Deploy latest version
