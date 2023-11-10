@@ -1,4 +1,4 @@
-name: dev-merge-project
+name: release-merge-project
 on:
   pull_request:
     branches:
