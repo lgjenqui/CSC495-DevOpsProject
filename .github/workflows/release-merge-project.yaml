@@ -1,16 +1,16 @@
-name: release-merge-project
-on:
-  pull_request:
-    branches:
-      - 'release**'
-jobs:
-  temp:
-    name: temp
-    runs-on: self-hosted
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-  # common-vulnerability:
-  #   uses: ./.github/workflows/common-vulnerability-job.yaml
-#     with:
-#       workflow-event: common-vulnerability-job-trigger
+# name: release-merge-project
+# on:
+#   pull_request:
+#     branches:
+#       - 'release**'
+# jobs:
+#   temp:
+#     name: temp
+#     runs-on: self-hosted
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+#   # common-vulnerability:
+#   #   uses: ./.github/workflows/common-vulnerability-job.yaml
+# #     with:
+# #       workflow-event: common-vulnerability-job-trigger
