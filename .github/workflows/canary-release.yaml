@@ -5,7 +5,7 @@ on:
       target_branch:
         description: 'Target Branch for PR'
         required: true
-        default: 'release*'
+        default: 'release**'
 jobs:
   build:
     name: Build Release Docker Image
