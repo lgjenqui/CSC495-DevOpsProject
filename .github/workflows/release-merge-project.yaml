@@ -1,7 +1,8 @@
 name: dev-merge-project
 on:
   pull_request:
-    branch: release*
+    branches:
+      - release**
 jobs:
   temp:
     name: temp
