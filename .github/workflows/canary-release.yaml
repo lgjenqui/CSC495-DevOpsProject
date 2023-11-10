@@ -1,11 +1,11 @@
 name: canary-release
 on:
-  workflow_dispatch:
-    inputs:
-      target_branch:
-        description: 'Target Branch for PR'
-        required: true
-        default: 'release**'
+  pull_request:
+    branches:
+      - 'release**'
+
+if: github.event.pull_request.merged == true
+
 jobs:
   build:
     name: Build Release Docker Image

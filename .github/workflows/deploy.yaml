@@ -1,11 +1,12 @@
 name: deploy
 on:
-  workflow_dispatch:
-    inputs:
-      target_branch:
-        description: 'Target Branch for PR'
-        required: true
-        default: 'main'
+  pull_request:
+    branches:
+      - 'main'
+    types:
+      - closed
+
+if: github.event.pull_request.merged == true
 
 jobs:
   deploy:
