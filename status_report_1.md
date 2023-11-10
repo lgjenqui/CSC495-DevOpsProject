@@ -31,8 +31,8 @@ Jubitta:
 
 - What didn't work:
 
-    Codecov is used to generate the coverage report. The Codecov generates the coverage report and checks the thresold coverage as 75%, which can be seen   in the Actions tab under the GitHub actions job result. However, there is trouble in uploading the coverage to Codecov.  Only is the report is uploaded, the coverage report can be seen on the PR. The Codecov is getting connected to the personal GitHub and unable find a way to link the Codecov to Ncsu GitHub(Github enterprise).
+    Codecov is used to generate the coverage report. The Codecov generates the coverage report and checks the thresold coverage as 75%, which can be seen   in the Actions tab under the GitHub actions job result. However, there is trouble in uploading the coverage to Codecov.  Only if the report is uploaded, the coverage report can be seen on the PR. The Codecov is getting connected to the personal GitHub but unable to find a way to link the Codecov to Ncsu GitHub(Github enterprise).
  
 - What to do differently:
 
-  To solve the issue with Codecov report not being uploaded, planning to use different tool to generate coverage report like JSCover or need to figure out a better work around to address the issue.
+  To solve the issue with Codecov report not being uploaded, planning to use a different tool to generate coverage report like JSCover or need to figure out a better work around to address the issue.
