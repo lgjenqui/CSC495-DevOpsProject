@@ -3,12 +3,13 @@ on:
   pull_request:
     branches:
       - 'release**'
-
-if: github.event.pull_request.merged == true
+    types:
+      - closed
 
 jobs:
   build:
     name: Build Release Docker Image
+    if: github.event.pull_request.merged == true
     runs-on: self-hosted
     steps:
       - name: Checkout code
@@ -16,6 +17,7 @@ jobs:
   
   canary-deploy:
     name: Begin Canary Deployment
+    if: github.event.pull_request.merged == true
     runs-on: self-hosted
     steps:
       - name: Checkout code

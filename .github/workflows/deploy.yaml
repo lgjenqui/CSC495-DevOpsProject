@@ -6,11 +6,10 @@ on:
     types:
       - closed
 
-if: github.event.pull_request.merged == true
-
 jobs:
   deploy:
     name: Deploy latest version
+    if: github.event.pull_request.merged == true
     runs-on: self-hosted
     steps:
       - name: Checkout code
