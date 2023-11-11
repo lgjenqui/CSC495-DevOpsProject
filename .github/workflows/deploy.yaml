@@ -1,0 +1,16 @@
+name: deploy
+on:
+  pull_request:
+    branches:
+      - 'main'
+    types:
+      - closed
+
+jobs:
+  deploy:
+    name: Deploy latest version
+    if: github.event.pull_request.merged == true
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
