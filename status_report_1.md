@@ -17,22 +17,24 @@ Jubitta:
 - Github PR: https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/pull/7
 
 **Next Steps:**
-- Create steps in pipeline to trigger npm audit after opening a PR to release
-- Create steps in pipeline to trigger canary deployment after release engineer approves PR into release
-- Create Dockerfile to run Ansible
-- Create Ansible playbook that configures Kubernetes
-- Create Ansible playbook for Canary Deployment
-- Create steps in pipeline to trigger final deployment after release engineer approves PR into main
-- Create Ansible playbook for final deployment
+- Create steps in pipeline to trigger npm audit after opening a PR to release - Luke
+- Create steps in pipeline to trigger canary deployment after release engineer approves PR into release - Sam
+- Create Dockerfile to run Ansible - Sam
+- Create Ansible playbook that configures Kubernetes - Sam
+- Create Ansible playbook for Canary Deployment - Luke
+- Create steps in pipeline to trigger final deployment after release engineer approves PR into main - Jubitta
+- Create Ansible playbook for final deployment - Jubitta
 
 
 **Retrospectives:**
 - What worked:
+    - The team was able to get most of the tasks done and they were divided relatively evenly
+    - The beginning parts of the pipeline are set up and just need to be combined together
 
 - What didn't work:
-
-    Codecov is used to generate the coverage report. The Codecov generates the coverage report and checks the thresold coverage as 75%, which can be seen   in the Actions tab under the GitHub actions job result. However, there is trouble in uploading the coverage to Codecov.  Only if the report is uploaded, the coverage report can be seen on the PR. The Codecov is getting connected to the personal GitHub but unable to find a way to link the Codecov to Ncsu GitHub(Github enterprise).
+    - We weren't able to combine all of our work together by the end of the sprint.
+    - Codecov is used to generate the coverage report. The Codecov generates the coverage report and checks the thresold coverage as 75%, which can be seen   in the Actions tab under the GitHub actions job result. However, there is trouble in uploading the coverage to Codecov.  Only if the report is uploaded, the coverage report can be seen on the PR. The Codecov is getting connected to the personal GitHub but unable to find a way to link the Codecov to Ncsu GitHub(Github enterprise).
  
 - What to do differently:
-
-  To solve the issue with Codecov report not being uploaded, planning to use a different tool to generate coverage report like JSCover or need to figure out a better work around to address the issue.
+    - We should allocate more time to integrate all of our work together.
+    - To solve the issue with Codecov report not being uploaded, planning to use a different tool to generate coverage report like JSCover or need to figure out a better work around to address the issue.
