@@ -1,0 +1,24 @@
+name: canary-release
+on:
+  pull_request:
+    branches:
+      - 'release**'
+    types:
+      - closed
+
+jobs:
+  build:
+    name: Build Release Docker Image
+    if: github.event.pull_request.merged == true
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+  
+  canary-deploy:
+    name: Begin Canary Deployment
+    if: github.event.pull_request.merged == true
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
