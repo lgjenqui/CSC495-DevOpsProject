@@ -16,6 +16,8 @@ Luke:
 - Created the Dockerfile to build the image for our release strategies. 
 - Created and tested the branch protection rules to prevent pushing or merging incorrectly without sufficient permissions or approval. 
 - GitHub Commit: (https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/commit/e38c40c2f178581dc4e00997af332d9c13585423)
+- GitHub PR: (https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/pull/22)
+
 
 
 Jubitta:
