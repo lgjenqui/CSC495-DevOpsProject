@@ -4,8 +4,8 @@ Sam:
 - Created an EsLint Linter for the Coffee Project's Javascript files
 - Created a GitHub actions pipeline that runs the linter
 - Fixed the current Coffee Project so it passes the linter rules
-- GitHub Commit: (https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/pull/24/files)
-
+- GitHub Commit: (https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/commit/af72697224bb4782fcd0ddddc1f876124afb33eb)
+- GitHub PR: (https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/pull/24/files)
 
 Luke:
 - Set up overarching pipeline structure, ensuring that they run at the proper times, including 
@@ -15,7 +15,8 @@ Luke:
     4. the final deploy workflow to complete the deployment after a PR is merged into main.
 - Created the Dockerfile to build the image for our release strategies. 
 - Created and tested the branch protection rules to prevent pushing or merging incorrectly without sufficient permissions or approval. 
-- GitHub Commit: (https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/pull/24/files)
+- GitHub Commit: (https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/commit/e38c40c2f178581dc4e00997af332d9c13585423)
+
 
 Jubitta:
 - Created a Github action for running Chai unit test.
