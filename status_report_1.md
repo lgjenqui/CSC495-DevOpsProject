@@ -8,6 +8,13 @@ Sam:
 
 
 Luke:
+- Set up overarching pipeline structure, ensuring that they run at the proper times, including 
+    1. The feature to development pipeline when a PR is opened,
+    2. The common vulnerability job when a feature to development or development to release PR is opened,
+    3. The build and canary release workflow when a release PR is merged, and 
+    4. the final deploy workflow to complete the deployment after a PR is merged into main.
+- Created the Dockerfile to build the image for our release strategies. 
+- Created and tested the branch protection rules to prevent pushing or merging incorrectly without sufficient permissions or approval. 
 
 Jubitta:
 - Created a Github action for running Chai unit test.
