@@ -15,7 +15,7 @@ Luke:
     4. the final deploy workflow to complete the deployment after a PR is merged into main.
 - Created the Dockerfile to build the image for our release strategies. 
 - Created and tested the branch protection rules to prevent pushing or merging incorrectly without sufficient permissions or approval. 
-- GitHub Commit: (https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/commit/e38c40c2f178581dc4e00997af332d9c13585423)
+- GitHub Commit: (https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/pull/24/files)
 
 Jubitta:
 - Created a Github action for running Chai unit test.
