@@ -4,7 +4,7 @@ Sam:
 - Created an EsLint Linter for the Coffee Project's Javascript files
 - Created a GitHub actions pipeline that runs the linter
 - Fixed the current Coffee Project so it passes the linter rules
-- GitHub Commit: (https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/commit/73adcf93203f41448d39580086cb9375575700)
+- GitHub Commit: (https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/pull/24/files)
 
 
 Luke:
