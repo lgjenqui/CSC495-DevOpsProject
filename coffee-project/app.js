@@ -7,8 +7,8 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
-app.use(express.static('public')); 
-module.exports = app
+app.use(express.static('public'));
+module.exports = app;
 
 // Endpoint to fetch available coffees
 app.get('/coffees', (req, res) => {
@@ -42,6 +42,9 @@ app.get('/orders', (req, res) => {
   res.json(orders);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server started on http://localhost:${PORT}`);
-});
+// Start the server only when this script is run directly, not when imported as a module
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server started on http://localhost:${PORT}`);
+  });
+}
