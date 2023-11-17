@@ -35,7 +35,7 @@ jobs:
         run: |
           docker run \
             -v $HOME/.ssh:/root/.ssh \
-            your_image_name \
+            setup-k8s \
             sh -c "ansible-playbook -i inventory/mycluster/hosts.yaml --become --become-user=root cluster.yml"
   
   canary-deploy:
