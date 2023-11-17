@@ -20,7 +20,8 @@ jobs:
     - name: Stop and Remove Existing Docker Container
       run: |
         CONTAINER_NAME="coffee-app"
-        if docker ps -a --format '{{.Names}}' | grep "$CONTAINER_NAME" > /dev/null; then
+        EXISTING_CONTAINER=$(docker ps -a --format '{{.Names}}' | grep "^$CONTAINER_NAME$")
+        if [ -n "$EXISTING_CONTAINER" ]; then
           docker stop "$CONTAINER_NAME"
           docker rm "$CONTAINER_NAME"
         fi
