@@ -16,9 +16,6 @@ jobs:
    # if: github.event.pull_request.merged == true
     runs-on: self-hosted
 
-    env:
-      DOCKER_BUILDKIT: 1
-      
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -36,7 +33,7 @@ jobs:
 
       - name: Run Docker container
         run: |
-          docker run -it \
+          docker run \
             -v $HOME/.ssh:/root/.ssh \
             your_image_name \
             sh -c "ansible-playbook -i inventory/mycluster/hosts.yaml --become --become-user=root cluster.yml"
