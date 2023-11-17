@@ -1,16 +1,48 @@
-FROM python:3-alpine
+# Use a smaller base image
+FROM python:3.9-alpine
+
+# Set environment variables
+ENV MASTER_IP=143.198.68.194
+ENV WORKER1_IP=137.184.81.142
+ENV WORKER2_IP=137.184.34.223
 
 # Install dependencies
-RUN apk add --update --no-cache ansible bash openssh
+RUN apk add --update --no-cache bash openssh git
 
-COPY initialize-servers.yaml project/initialize-servers.yaml
-COPY k8s-dependencies.yaml project/k8s-dependencies.yaml
-COPY master-node-setup.yaml project/master-node-setup.yaml
-COPY worker-setup.yaml project/worker-setup.yaml
-COPY hosts.yaml project/hosts.yaml
+# Create necessary directories
+WORKDIR /root
+RUN mkdir -p .ssh homelab/kubernetes
+RUN mkdir -p .ssh clusters/homelab-k8s
 
-RUN mkdir -p /root/.ssh
-WORKDIR /project
+# Copy files
+#COPY initialize-servers.yaml /root/homelab/
+#COPY hosts.yaml /root/homelab/
 
-ENTRYPOINT []
+# Clone kubespray
+RUN git clone https://github.com/kubernetes-sigs/kubespray /root/homelab/kubernetes/kubespray
+
+# Install Python dependencies
+WORKDIR /root/homelab/kubernetes/kubespray
+RUN pip install -U -r requirements.txt
+
+# Copy inventory/sample to inventory/mycluster
+WORKDIR /root/homelab/kubernetes/kubespray
+RUN cp -rpf inventory/sample inventory/mycluster
+
+# Declare IPS array and update Ansible inventory
+ENV IPS="$MASTER_IP $WORKER1_IP $WORKER2_IP"
+RUN CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inventory.py $IPS
+
+# Copy the SSH private key to the image
+ARG SSH_PATH
+COPY $SSH_PATH /root/.ssh/
+RUN chmod 600 /root/.ssh/id_rsa
+
+# Deploy kubernetes cluster
+#RUN ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root reset.yml
+
+# Set the working directory
+WORKDIR /root/homelab
+
+# Default command
 CMD ["/bin/bash"]

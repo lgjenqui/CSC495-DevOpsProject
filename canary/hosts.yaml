@@ -1,7 +1,7 @@
 [masters]
-24.144.93.119 ansible_user=root
+143.198.68.194 ansible_user=root
 [workers]
-146.190.51.88 ansible_user=root
-164.92.103.159 ansible_user=root
+137.184.81.142 ansible_user=root
+137.184.34.223 ansible_user=root
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
