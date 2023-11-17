@@ -5,6 +5,10 @@ on:
       - 'release**'
     types:
       - closed
+#TODO: DELETE LATER- JUST FOR TESTING PURPOSES
+  push:
+    branches:
+      - feature-*
 
 jobs:
   build:
