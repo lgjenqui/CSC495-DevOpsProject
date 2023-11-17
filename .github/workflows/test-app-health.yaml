@@ -22,10 +22,7 @@ jobs:
         PORT=3000
         if [ "$(lsof -ti :$PORT)" ]; then
           echo "Port $PORT is already in use."
-          CONFLICTING_PROCESS_PID=$(lsof -ti :$PORT)
-          echo "Stopping the conflicting process with PID $CONFLICTING_PROCESS_PID"
-          kill -9 $CONFLICTING_PROCESS_PID
-          sleep 5  # Wait for the process to be terminated
+          fuser -k -n tcp $PORT
         else
           echo "Port $PORT is available."
         fi
