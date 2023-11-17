@@ -27,7 +27,8 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
       - name: Build Docker image
-        run: docker build -t setup-k8s -f CSC519-Project/canary/Dockerfile .
+        working-directory: canary
+        run: docker build -t setup-k8s.
 
       - name: Run Docker container
         run: |
