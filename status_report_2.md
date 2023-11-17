@@ -30,4 +30,8 @@ Jubitta:
   - A github ation pipeline that would build the docker conatiner image for the app and run the container image. Then checks if the app is up and running on the port specified.
   - This action would run on the feature and dev branch on push and on the pr to dev.
 
+- Linting for ansible playbook:
+  - The current pieple only has linting for the app Javascript.
+  - We would also be adding linting for the ansible playbook.
+
 (itemize in bullet points what additional elements you are going to complete, and then complete them. Or you can justify why the proposed pipeline is sufficiently complex.)
