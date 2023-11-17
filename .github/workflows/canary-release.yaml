@@ -13,7 +13,7 @@ on:
 jobs:
   build:
     name: Build Release Docker Image
-    if: github.event.pull_request.merged == true
+   # if: github.event.pull_request.merged == true
     runs-on: self-hosted
     steps:
       - name: Checkout code
