@@ -23,6 +23,7 @@ jobs:
         if [ "$(lsof -ti :$PORT)" ]; then
           echo "Port $PORT is already in use."
           fuser -k -n tcp $PORT
+          sleep 10  # Wait for the port to be released
         else
           echo "Port $PORT is available."
         fi
