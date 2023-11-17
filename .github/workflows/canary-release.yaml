@@ -15,6 +15,10 @@ jobs:
     name: Build Release Docker Image
    # if: github.event.pull_request.merged == true
     runs-on: self-hosted
+
+    env:
+      DOCKER_BUILDKIT: 1
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
