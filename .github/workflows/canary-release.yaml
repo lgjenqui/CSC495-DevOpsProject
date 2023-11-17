@@ -28,7 +28,7 @@ jobs:
 
       - name: Build Docker image
         working-directory: canary
-        run: docker build -t setup-k8s.
+        run: docker build -t setup-k8s .
 
       - name: Run Docker container
         run: |
