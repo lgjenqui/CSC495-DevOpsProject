@@ -14,6 +14,9 @@ Jubitta:
   - PR for the change: https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/pull/30
  
 **Next Steps:**
+- Work on getting Github Actions to run Kubespray docker (Sam)
+
+**Retrospectives**
 - What worked:
 
 - What didn't work:
