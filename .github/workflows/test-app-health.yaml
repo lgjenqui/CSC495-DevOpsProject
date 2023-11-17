@@ -20,7 +20,7 @@ jobs:
     - name: Check Port Availability
       run: |
         PORT=3000
-        if netstat -tuln | grep ":$PORT " > /dev/null; then
+        if ss -tuln | grep ":$PORT " > /dev/null; then
           echo "Port $PORT is already in use."
           fuser -k -n tcp $PORT
           sleep 2  # Wait for the port to be released
