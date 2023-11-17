@@ -42,6 +42,9 @@ app.get('/orders', (req, res) => {
     res.json(orders);
 });
 
-app.listen(PORT, () => {
+// Start the server only when this script is run directly, not when imported as a module
+if (require.main === module) {
+  app.listen(PORT, () => {
     console.log(`Server started on http://localhost:${PORT}`);
-});
+  });
+}
