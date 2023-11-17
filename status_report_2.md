@@ -3,6 +3,7 @@
 Sam:
  - Created 4 Ansible playbooks to configure Kubernetes on a master, and 2 worker nodes that were hosted on DigitalOcean. I spend most of the week on this and after a lot of trouble shooting I wasn't able to ge the worker nodes to run and decided to do a different approach. (Commit with some of the playbooks I made: https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/commit/41edc8d8873c2028dcfeb80fc7a405b310b6799f)
  - Instead I decided to use Kubespray, which is an open source tool that uses Ansible to configure Kubernetes. I made a Dockerfile to configure the settings. Then, I made GitHub actions steps to build the Dockefile and run the Ansible playbook. I'm running into issues with the SSH token to run the Ansible playbooks. I plan to go to office hours next week to get assitance.
+ 
 Luke:
 
 Jubitta:
