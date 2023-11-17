@@ -14,10 +14,6 @@ WORKDIR /root
 RUN mkdir -p .ssh homelab/kubernetes
 RUN mkdir -p .ssh clusters/homelab-k8s
 
-# Copy files
-#COPY initialize-servers.yaml /root/homelab/
-#COPY hosts.yaml /root/homelab/
-
 # Clone kubespray
 RUN git clone https://github.com/kubernetes-sigs/kubespray /root/homelab/kubernetes/kubespray
 
@@ -32,17 +28,6 @@ RUN cp -rpf inventory/sample inventory/mycluster
 # Declare IPS array and update Ansible inventory
 ENV IPS="$MASTER_IP $WORKER1_IP $WORKER2_IP"
 RUN CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inventory.py $IPS
-
-# Copy the SSH private key to the image
-ARG SSH_PATH
-COPY $SSH_PATH /root/.ssh/
-RUN chmod 600 /root/.ssh/id_rsa
-
-# Deploy kubernetes cluster
-#RUN ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root reset.yml
-
-# Set the working directory
-WORKDIR /root/homelab
 
 # Default command
 CMD ["/bin/bash"]
