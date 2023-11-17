@@ -17,15 +17,12 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Check Port Availability
+    - name: Stop and Remove Existing Docker Container
       run: |
-        PORT=3000
-        if ss -tuln | grep ":$PORT " > /dev/null; then
-          echo "Port $PORT is already in use."
-          fuser -k -n tcp $PORT
-          sleep 2  # Wait for the port to be released
-        else
-          echo "Port $PORT is available."
+        CONTAINER_NAME="coffee-app"
+        if docker ps -a --format '{{.Names}}' | grep "$CONTAINER_NAME" > /dev/null; then
+          docker stop "$CONTAINER_NAME"
+          docker rm "$CONTAINER_NAME"
         fi
 
     - name: Build Docker Image
