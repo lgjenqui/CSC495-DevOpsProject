@@ -20,10 +20,10 @@ jobs:
     - name: Check Port Availability
       run: |
         PORT=3000
-        if [ "$(lsof -ti :$PORT)" ]; then
+        if netstat -tuln | grep ":$PORT " > /dev/null; then
           echo "Port $PORT is already in use."
           fuser -k -n tcp $PORT
-          sleep 10  # Wait for the port to be released
+          sleep 2  # Wait for the port to be released
         else
           echo "Port $PORT is available."
         fi
