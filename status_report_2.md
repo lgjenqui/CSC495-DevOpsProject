@@ -14,6 +14,7 @@ Jubitta:
   - PR for the change: https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/pull/30
 
 - Reviewed PRs of Luke and Sam.
+- Most of the things assigned to me is dependent on the Kubernetes setup for canary release. Hence, more work and effort is reserved for the final submission.
  
 **Next Steps:**
 - Work on getting Github Actions to run Kubespray docker (Sam)
