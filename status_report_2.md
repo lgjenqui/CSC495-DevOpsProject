@@ -42,4 +42,10 @@ Jubitta:
   - The current pipeline only has linting for the app Javascript.
   - We would also be adding linting for the ansible playbook.
 
-(itemize in bullet points what additional elements you are going to complete, and then complete them. Or you can justify why the proposed pipeline is sufficiently complex.)
+- Feature flags:
+  - Choose a feature flag management tool compatible with your development environment(LaunchDarkly, ConfigCat, etc.,)
+  - Integrate the feature flag SDK into the application code to control feature visibility.
+  - Use the feature flag tool's dashboard to create and manage flags based on development and release requirements.
+  - Modify DevOps pipeline scripts to handle feature flags in linting, testing, code coverage, and vulnerability analysis steps.
+  - Utilize feature flags during the Canary release to control the rollout of specific features to different user groups.
+  - Modify deployment playbooks to account for feature flags during the deployment process.
