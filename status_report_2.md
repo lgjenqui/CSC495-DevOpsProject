@@ -35,7 +35,16 @@ Jubitta:
   - This will also further enable our full testing of the pipelines as we begin to consider further canary deployments, rollbacks, and complete deployment strategies.
 - Create steps in pipeline to trigger final deployment after release engineer approves PR into main (Jubitta)
 - Create Ansible playbook for final deployment (Jubitta)
+  - This will be orchestrated using Kubernetes and ensure that our release process completes the release smoothly following our canary release. 
 - Setting up feature flags (Jubitta)
+- Setting up rollback strategy (Luke)
+  - This will allow the release engineer to easily revert to a previous deployment if something goes awry with a release, ensuring that a predictable and consistent rollback is performed each time it occurs. 
+- Ansible linting (Luke)
+  - This will add linting steps for our Ansible playbooks to ensure that we are creating high-quality deployment scripts, allowing for sustainable and predictable behavior. 
+  - This will be similar to the linting steps already performed on the JS project; however, it will use an Ansible linter to ensure high code quality. 
+- Canary release (Luke)
+  - This will continue the canary release development and ensure that our Kubernetes release strategies can be completed. 
+  - Although not primarily dependent on the ongoing Kubernetes work, it will build off of it and be improved by the work that is being conducted for the setup. 
 
 **Retrospectives**
 - What worked:
