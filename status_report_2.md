@@ -12,6 +12,8 @@ Jubitta:
   - This action would run on the feature and dev branch on push and on the pr to dev.
   - Major commit: https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/commit/bc66af4f31cc62a0fc15ae13a60429685e87e454
   - PR for the change: https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/pull/30
+
+- Reviewed PRs of Luke and Sam.
  
 **Next Steps:**
 - Work on getting Github Actions to run Kubespray docker (Sam)
@@ -37,7 +39,7 @@ Jubitta:
   - This action would run on the feature and dev branch on push and on the pr to dev.
 
 - Linting for ansible playbook:
-  - The current pieple only has linting for the app Javascript.
+  - The current pipeline only has linting for the app Javascript.
   - We would also be adding linting for the ansible playbook.
 
 (itemize in bullet points what additional elements you are going to complete, and then complete them. Or you can justify why the proposed pipeline is sufficiently complex.)
