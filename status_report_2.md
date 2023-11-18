@@ -26,6 +26,11 @@ Jubitta:
   - Major commit: https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/commit/bc66af4f31cc62a0fc15ae13a60429685e87e454
   - PR for the change: https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/pull/30
 
+- Added linting for ansible playbook
+  - Lints ansible playbooks and yaml files.
+  - This action would run on the feature and dev branch on push and on the pr to dev.
+  - Major commit: https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/pull/33/commits/5af36b2979531701d1e2a78e7f6a9356b36a8b98
+  - PR for the change: https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/pull/33
 - Reviewed PRs of Luke and Sam.
 - Most of the things assigned to me is dependent on the Kubernetes setup for canary release. Hence, more work and effort is reserved for the final submission.
  
@@ -72,7 +77,7 @@ Jubitta:
   - This verifies that the application can launch and run with a healthy state if it is to be further developer or released upon. 
   - This action would run on the feature and dev branch on push and on the pr to dev.
 
-- Linting for ansible playbook:
+- Added linting for ansible playbook:
   - The current pipeline only has linting for the app Javascript.
   - We would also be adding linting for the ansible playbook.
   - This will ensure that our Ansible deployments follow best practices. 
