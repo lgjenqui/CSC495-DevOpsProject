@@ -23,9 +23,9 @@ Jubitta:
 
 **Retrospectives**
 - What worked:
- - Merging most of the PRs and integration of code changes into dev.
- - Addressing retrospective from the first sprint. 
- - Almost addressing a major portion of the originally proposed pipeline. This has given us the flexibility to add additional steps in the pipeline.
+  - Merging most of the PRs and integration of code changes into dev.
+  - Addressing retrospective from the first sprint. 
+  - Almost addressing a major portion of the originally proposed pipeline. This has given us the flexibility to add additional steps in the pipeline.
 
 - What didn't work:
   - Spent too much time trying to configure Kubernetes in a complicated way
