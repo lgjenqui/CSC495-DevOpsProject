@@ -15,6 +15,8 @@ Jubitta:
  
 **Next Steps:**
 - Work on getting Github Actions to run Kubespray docker (Sam)
+- Create steps in pipeline to trigger final deployment after release engineer approves PR into main (Jubitta)
+- Create Ansible playbook for final deployment (Jubitta)
 
 **Retrospectives**
 - What worked:
