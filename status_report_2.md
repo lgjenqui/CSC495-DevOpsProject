@@ -47,7 +47,7 @@ Jubitta:
   - We would also be adding linting for the ansible playbook.
 
 - Feature flags:
-  - Choose a feature flag management tool compatible with your development environment(LaunchDarkly, ConfigCat, etc.,)
+  - Choose a feature flag management tool compatible with the development environment(LaunchDarkly, ConfigCat, etc.,)
   - Integrate the feature flag SDK into the application code to control feature visibility.
   - Use the feature flag tool's dashboard to create and manage flags based on development and release requirements.
   - Modify DevOps pipeline scripts to handle feature flags in linting, testing, code coverage, and vulnerability analysis steps.
