@@ -20,8 +20,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        
       - name: Give sudo permissions
-      - run: sudo usermod -a -G docker root
+        run: sudo usermod -a -G docker root
       
       - name: Build Docker image
         working-directory: canary
