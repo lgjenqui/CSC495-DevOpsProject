@@ -30,10 +30,7 @@ jobs:
         
       - name: Run Docker container
         run: |
-          docker run \
-            -v $HOME/.ssh:/root/.ssh \
-            setup-k8s \
-            sh -c "ansible-playbook -i inventory/mycluster/hosts.yaml --become --become-user=root cluster.yml"
+          docker run ansible-playbook -i /inventory/sample/hosts.yml --become --become-user=root --user=ubuntu --private-key /root/.ssh/id_rsa cluster.yml
   
   canary-deploy:
     name: Begin Canary Deployment
