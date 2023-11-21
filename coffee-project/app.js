@@ -1,5 +1,3 @@
-// app.js
-
 const express = require('express');
 const { coffees, orders } = require('./data');
 
@@ -44,7 +42,7 @@ app.get('/orders', (req, res) => {
 
 // Start the server only when this script is run directly, not when imported as a module
 if (require.main === module) {
-  app.listen(PORT, () => {
-    console.log(`Server started on http://localhost:${PORT}`);
-  });
+    app.listen(PORT, () => {
+        console.log(`Server started on http://localhost:${PORT}`);
+    });
 }
