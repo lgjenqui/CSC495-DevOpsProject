@@ -8,8 +8,8 @@ on:
       - closed
 
 jobs:
-  build:
-    name: Build Release Docker Image
+  k8s-setup:
+    name: Setup Kubernetes environment and nodes
     if: github.event.pull_request.merged == true
     runs-on: self-hosted
 
@@ -27,11 +27,59 @@ jobs:
       - name: Run Docker container
         run: |
          docker run -v /root/.ssh:/root/.ssh/ project ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml
-  
-  canary-deploy:
-    name: Begin Canary Deployment
+
+  build:
+    name: Build canary Docker Image and push to Docker Hub
     if: github.event.pull_request.merged == true
     runs-on: self-hosted
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PAT }}
+
+      - run: |
+          docker build ./coffee-project -t lgjenqui/coffee-project:canary
+          docker push lgjenqui/coffee-project:canary
+
+  canary-deploy:
+    name: Begin Canary Deployment
+    needs: |
+      k8s-setup
+      build
+    if: github.event.pull_request.merged == true
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+      - uses: azure/setup-kubectl@v2.0
+
+      - name: Setup K8s context
+        uses: azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+
+      - name: Set imagePullSecret
+        uses: azure/k8s-create-secret@v4
+        with:
+          secret-name: 'coffee-project-pat'
+          container-registry-url: 'docker.io'
+          container-registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
+          container-registry-password: ${{ secrets.DOCKERHUB_PAT }}
+        id: create-secret
+
+      - name: Deploy to Kubernetes cluster
+        uses: Azure/k8s-deploy@v4
+        with:
+          action: promote
+          strategy: canary
+          percentage: 33
+          force: true
+          manifests: |
+              canary/coffee.yaml
+              canary/service.yaml
+          images: |
+              docker.io/lgjenqui/coffee-project:canary

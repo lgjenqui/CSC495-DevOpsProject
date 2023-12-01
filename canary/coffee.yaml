@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coffee-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coffee
+  template:
+    metadata:
+      labels:
+        app: coffee
+    spec:
+      imagePullSecrets:
+        - name: coffee-project-pat
+      containers:
+        - name: coffee-project-container
+          image: docker.io/lgjenqui/coffee-project:release
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              hostPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
