@@ -8,7 +8,6 @@ app.use(express.json());
 app.use(express.static('public'));
 module.exports = app;
 
-
 // Endpoint to fetch available coffees
 app.get('/coffees', (req, res) => {
     res.json(coffees);
