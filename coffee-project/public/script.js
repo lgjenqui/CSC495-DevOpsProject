@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 document.addEventListener('DOMContentLoaded', () => {
     axios.get('/coffees')
         .then(response => {
@@ -6,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const listItem = document.createElement('li');
                 listItem.textContent = `${coffee.name} - $${coffee.price}`;
                 const orderButton = document.createElement('button');
-                orderButton.textContent = "Order";
+                orderButton.textContent = 'Order';
                 orderButton.onclick = () => placeOrder(coffee.id);
                 listItem.appendChild(orderButton);
                 coffeeList.appendChild(listItem);
@@ -14,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
-function placeOrder(coffeeId) {
-    axios.post('/order', { coffeeId: coffeeId, quantity: 1 })
+function placeOrder (coffeeId) {
+    axios.post('/order', { coffeeId, quantity: 1 })
         .then(response => {
             alert(`Ordered ${response.data.coffeeName}! Total: $${response.data.total}`);
         })
