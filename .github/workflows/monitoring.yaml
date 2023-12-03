@@ -1,0 +1,48 @@
+name: monitor
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  build-monitoring:
+    name: Build Monitoring Docker Image
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Give sudo permissions
+        run: sudo usermod -a -G docker root
+      
+      - name: Build Docker image
+        working-directory: monitoring
+        run: docker build -t monitoring .
+
+      - name: Run Docker container
+        run: |
+          docker run -v /root/.ssh:/root/.ssh/ project ansible-playbook -i hosts.yaml monitor.yaml
+
+  dashboard:
+    name: Update PR Comment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '14'
+
+      - name: Update PR Comment
+        run: |
+          echo "const comment = 'Check out the Grafana dashboard for the latest metrics: [Grafana Dashboard](http://143.244.179.253:3000/d/dw2aBiqkz/mydashboard?orgId=1)';" > comment.js
+          echo "const octokit = require('@octokit/rest')();" >> comment.js
+          echo "await octokit.issues.createComment({" >> comment.js
+          echo "  owner: context.repo.owner," >> comment.js
+          echo "  repo: context.repo.repo," >> comment.js
+          echo "  issue_number: context.payload.pull_request.number," >> comment.js
+          echo "  body: comment," >> comment.js
+          echo "});" >> comment.js
+          node comment.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
