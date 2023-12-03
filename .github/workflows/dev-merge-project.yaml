@@ -1,27 +1,118 @@
 name: dev-merge-project
+
 on:
   pull_request:
     branches:
-      - 'dev'
+      - dev
+
 jobs:
-  lint:
-    name: Linting
+  credential-scan:
     runs-on: self-hosted
+    defaults:
+      run:
+        shell: bash
     steps:
-      - name: Checkout code
+      - name: Checkout code, including past commits
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-  test:
-    name: Unit Testing
-    runs-on: self-hosted
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: TruffleHog scan
+        id: trufflehog
+        uses: trufflesecurity/trufflehog@main
+        continue-on-error: true
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --debug
 
-  coverage:
-    name: Coverage Check
+      - name: Scan Results Status
+        if: steps.trufflehog.outcome == 'failure'
+        run: exit 1
+
+  es-lint-check:
+    name: ESLint Check
     runs-on: self-hosted
-    needs: test
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install Dependencies
+      working-directory: coffee-project
+      run: npm install
+
+    - name: Run ESLint
+      working-directory: coffee-project
+      run: npm run lint --lint-file-patterns=src/
+
+  chai-unit-testing:
+    runs-on: self-hosted
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        working-directory: coffee-project
+        run: npm install
+
+      - name: Run unit tests
+        working-directory: coffee-project
+        run: npm run test
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+  
+  check-app-health:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Stop and Remove Existing Docker Container
+      run: |
+        CONTAINER_NAME="coffee-app"
+        EXISTING_CONTAINER=$(docker ps -a --format '{{.Names}}' | grep "^$CONTAINER_NAME$")
+        if [ -n "$EXISTING_CONTAINER" ]; then
+          docker stop "$CONTAINER_NAME"
+          docker rm "$CONTAINER_NAME"
+        fi
+
+    - name: Build Docker Image
+      working-directory: coffee-project
+      run: docker build -t coffee-app .
+
+    - name: Run Docker Container
+      run: docker run -d -p 3002:3000 --name coffee-app coffee-app
+
+    - name: Display Running Containers
+      run: docker ps
+
+    - name: Wait for Application to Start
+      run: sleep 10
+
+    - name: Test Website Availability
+      run: |
+        if [ "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:3002)" -eq 200 ]; then
+          echo "Website is accessible."
+        else
+          echo "Website is not accessible."
+          exit 1
+        fi
+
+    - name: Stop Docker Container
+      run: docker stop $(docker ps -q)
