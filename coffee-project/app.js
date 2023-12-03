@@ -1,23 +1,49 @@
 const express = require('express');
-const { coffees, orders } = require('./data');
+const { coffees, specialCoffees, orders } = require('./data');
 
 const app = express();
 const PORT = 3000;
+
+var LaunchDarkly = require('launchdarkly-node-client-sdk');
+var user = {
+    key: "developer"
+  };
+
+const ldClient = LaunchDarkly.initialize('656c96c2d17aa20fa5a462a9', user);
 
 app.use(express.json());
 app.use(express.static('public'));
 module.exports = app;
 
+let flagValue = false
+function updateFlagValue() {
+    flagValue = ldClient.variation("featureFlag", false);
+    console.log("Feature flag 'featureFlag' is " + flagValue + " for this user");
+}
+
+ldClient.waitForInitialization().then(function() {
+    updateFlagValue();
+    ldClient.on('change', (allChanges) => {
+        console.log('Flags changed:', JSON.stringify(allChanges));
+        updateFlagValue(); // Update flagValue on change
+    });
+  }).catch(function(error) {
+    console.log("SDK failed to initialize: " + error);
+    process.exit(1);
+});
+
 // Endpoint to fetch available coffees
 app.get('/coffees', (req, res) => {
-    res.json(coffees);
+    const availableCoffees = flagValue ? specialCoffees : coffees;
+    res.json(availableCoffees);
 });
 
 // Endpoint to place an order
 app.post('/order', (req, res) => {
     const { coffeeId, quantity } = req.body;
 
-    const coffee = coffees.find(c => c.id === coffeeId);
+    const coffeeArray = flagValue ? specialCoffees : coffees;
+    const coffee = coffeeArray.find(c => c.id === coffeeId);
 
     if (!coffee) {
         return res.status(400).json({ error: 'Invalid coffee ID' });

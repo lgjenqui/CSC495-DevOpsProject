@@ -12,7 +12,8 @@
   "dependencies": {
     "axios": "^1.5.1",
     "express": "^4.17.1",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "launchdarkly-node-client-sdk": "^3.0.2"
   },
   "keywords": [
     "coffee",
