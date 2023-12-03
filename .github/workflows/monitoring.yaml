@@ -24,20 +24,16 @@ jobs:
         run: |
           docker run -v /root/.ssh:/root/.ssh/ monitoring ansible-playbook -i hosts.yaml monitor.yaml
 
-  dashboard:
-    name: Update PR Comment
+  comment-dashboard:
+    name: Add PR Comment with Dashboard Link
     runs-on: self-hosted
     steps:
-      - name: Update PR Comment
-        run: |
-          echo "const comment = 'Check out the Grafana dashboard for the latest metrics: [Grafana Dashboard](http://143.198.68.194:3000/d/f7c8ba0c-f3ad-4f18-900f-35df087be3d0/my-dashboard?orgId=1&from=1701561316593&to=1701582916593)';" > comment.js
-          echo "const octokit = require('@octokit/rest')();" >> comment.js
-          echo "await octokit.issues.createComment({" >> comment.js
-          echo "  owner: context.repo.owner," >> comment.js
-          echo "  repo: context.repo.repo," >> comment.js
-          echo "  issue_number: context.payload.pull_request.number," >> comment.js
-          echo "  body: comment," >> comment.js
-          echo "});" >> comment.js
-          node comment.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 View the Monitoring Dashboard Here! [Monitoring Dashboard](http://143.198.68.194:3000/d/f7c8ba0c-f3ad-4f18-900f-35df087be3d0/my-dashboard?orgId=1&from=1701561316593&to=1701582916593)'
+            })
