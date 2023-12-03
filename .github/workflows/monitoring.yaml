@@ -35,7 +35,7 @@ jobs:
 
       - name: Update PR Comment
         run: |
-          echo "const comment = 'Check out the Grafana dashboard for the latest metrics: [Grafana Dashboard](http://143.244.179.253:3000/d/dw2aBiqkz/mydashboard?orgId=1)';" > comment.js
+          echo "const comment = 'Check out the Grafana dashboard for the latest metrics: [Grafana Dashboard](http://143.198.68.194:3000/d/dw2aBiqkz/mydashboard?orgId=1)';" > comment.js
           echo "const octokit = require('@octokit/rest')();" >> comment.js
           echo "await octokit.issues.createComment({" >> comment.js
           echo "  owner: context.repo.owner," >> comment.js

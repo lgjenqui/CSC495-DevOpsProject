@@ -83,8 +83,8 @@
       grafana_datasource:
         name: Prometheus
         access: proxy
-        url: http://143.244.179.253:3000/
+        url: http://143.198.68.194:3000/
         is_default: true
         ds_type: prometheus
-        ds_url: http://143.244.179.253:9090
+        ds_url: http://143.198.68.194:9090
       register: prometheus_datasource
