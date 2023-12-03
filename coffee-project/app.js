@@ -20,11 +20,13 @@ module.exports = app;
 
 let flagValue = false
 function updateFlagValue () {
+    /* istanbul ignore next */
     flagValue = ldClient.variation('featureFlag', false);
     console.log('Feature flag \'featureFlag\' is ' + flagValue + ' for this user');
 }
 
 if (require.main === module) {
+    /* istanbul ignore next */
     ldClient.waitForInitialization().then(function () {
         updateFlagValue();
         ldClient.on('change', (allChanges) => {
@@ -32,6 +34,7 @@ if (require.main === module) {
             updateFlagValue(); // Update flagValue on change
         });
     }).catch(function (error) {
+        /* istanbul ignore next */
         console.log('SDK failed to initialize: ' + error);
         process.exit(1);
     });
