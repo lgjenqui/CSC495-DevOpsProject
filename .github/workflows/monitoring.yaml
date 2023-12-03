@@ -22,7 +22,7 @@ jobs:
 
       - name: Run Docker container
         run: |
-          docker run -v /root/.ssh:/root/.ssh/ project ansible-playbook -i hosts.yaml monitor.yaml
+          docker run -v /root/.ssh:/root/.ssh/ monitoring ansible-playbook -i hosts.yaml monitor.yaml
 
   dashboard:
     name: Update PR Comment
