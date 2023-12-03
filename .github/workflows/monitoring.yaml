@@ -1,0 +1,39 @@
+name: monitor
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  build-monitoring:
+    name: Build Monitoring Docker Image
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Give sudo permissions
+        run: sudo usermod -a -G docker root
+      
+      - name: Build Docker image
+        working-directory: monitoring
+        run: docker build -t monitoring .
+
+      - name: Run Docker container
+        run: |
+          docker run -v /root/.ssh:/root/.ssh/ monitoring ansible-playbook -i hosts.yaml monitor.yaml
+
+  comment-dashboard:
+    name: Add PR Comment with Dashboard Link
+    runs-on: self-hosted
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 View the Monitoring Dashboard Here! [Monitoring Dashboard](http://143.244.179.253:3000/d/dw2aBiqkz/mydashboard?orgId=1&from=1701619246701&to=1701640846701)'
+            })
