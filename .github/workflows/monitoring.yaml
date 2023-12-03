@@ -28,11 +28,6 @@ jobs:
     name: Update PR Comment
     runs-on: self-hosted
     steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '14'
-
       - name: Update PR Comment
         run: |
           echo "const comment = 'Check out the Grafana dashboard for the latest metrics: [Grafana Dashboard](http://143.198.68.194:3000/d/f7c8ba0c-f3ad-4f18-900f-35df087be3d0/my-dashboard?orgId=1&from=1701561316593&to=1701582916593)';" > comment.js
