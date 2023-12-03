@@ -30,6 +30,7 @@ module.exports = {
         indent: ['error', 4],
         quotes: ['error', 'single'],
         'prefer-const': 0,
-        'n/handle-callback-err': 0
+        'n/handle-callback-err': 0,
+        'no-undef': 0
     }
 };

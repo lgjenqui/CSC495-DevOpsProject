@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 document.addEventListener('DOMContentLoaded', () => {
     axios.get('/coffees')
         .then(response => {
