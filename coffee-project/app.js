@@ -25,13 +25,13 @@ function updateFlagValue () {
 }
 
 if (require.main === module) {
-    ldClient.waitForInitialization ().then(function() {
+    ldClient.waitForInitialization().then(function () {
         updateFlagValue();
         ldClient.on('change', (allChanges) => {
             console.log('Flags changed:', JSON.stringify(allChanges));
             updateFlagValue(); // Update flagValue on change
         });
-    }).catch(function(error) {
+    }).catch(function (error) {
         console.log('SDK failed to initialize: ' + error);
         process.exit(1);
     });
