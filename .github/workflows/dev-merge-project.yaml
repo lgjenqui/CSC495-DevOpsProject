@@ -36,21 +36,42 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Install Dependencies
-      working-directory: coffee-project
-      run: npm install
+      - name: Install Dependencies
+        working-directory: coffee-project
+        run: npm install
 
-    - name: Run ESLint
-      working-directory: coffee-project
-      run: npm run lint --lint-file-patterns=src/
+      - name: Run ESLint
+        working-directory: coffee-project
+        run: npm run lint --lint-file-patterns=src/
+
+  ansible-lint-check:
+    name: Ansible Lint
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run ansible-lint
+        working-directory: ${{ github.workspace }}
+        run: |
+          docker pull pipelinecomponents/ansible-lint
+          PLAYBOOK_PATH=$(find . -type f -name "*.yaml" -o -name "*.yml" | head -n 1)
+
+          if [ -z "$PLAYBOOK_PATH" ]; then
+            echo "No Ansible playbook found."
+          else
+            PLAYBOOK_PATH_RELATIVE=$(realpath --relative-to=${{ github.workspace }} $PLAYBOOK_PATH)
+            echo "Running ansible-lint on playbook: /playbook/${PLAYBOOK_PATH_RELATIVE}"
+            docker run --rm -v ${{ github.workspace }}:/playbook pipelinecomponents/ansible-lint ansible-lint /playbook/${PLAYBOOK_PATH_RELATIVE}
+          fi
 
   chai-unit-testing:
     runs-on: self-hosted
@@ -75,44 +96,44 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-  
+
   check-app-health:
     runs-on: self-hosted
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Stop and Remove Existing Docker Container
-      run: |
-        CONTAINER_NAME="coffee-app"
-        EXISTING_CONTAINER=$(docker ps -a --format '{{.Names}}' | grep "^$CONTAINER_NAME$")
-        if [ -n "$EXISTING_CONTAINER" ]; then
-          docker stop "$CONTAINER_NAME"
-          docker rm "$CONTAINER_NAME"
-        fi
+      - name: Stop and Remove Existing Docker Container
+        run: |
+          CONTAINER_NAME="coffee-app"
+          EXISTING_CONTAINER=$(docker ps -a --format '{{.Names}}' | grep "^$CONTAINER_NAME$")
+          if [ -n "$EXISTING_CONTAINER" ]; then
+            docker stop "$CONTAINER_NAME"
+            docker rm "$CONTAINER_NAME"
+          fi
 
-    - name: Build Docker Image
-      working-directory: coffee-project
-      run: docker build -t coffee-app .
+      - name: Build Docker Image
+        working-directory: coffee-project
+        run: docker build -t coffee-app .
 
-    - name: Run Docker Container
-      run: docker run -d -p 3002:3000 --name coffee-app coffee-app
+      - name: Run Docker Container
+        run: docker run -d -p 3002:3000 --name coffee-app coffee-app
 
-    - name: Display Running Containers
-      run: docker ps
+      - name: Display Running Containers
+        run: docker ps
 
-    - name: Wait for Application to Start
-      run: sleep 10
+      - name: Wait for Application to Start
+        run: sleep 10
 
-    - name: Test Website Availability
-      run: |
-        if [ "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:3002)" -eq 200 ]; then
-          echo "Website is accessible."
-        else
-          echo "Website is not accessible."
-          exit 1
-        fi
+      - name: Test Website Availability
+        run: |
+          if [ "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:3002)" -eq 200 ]; then
+            echo "Website is accessible."
+          else
+            echo "Website is not accessible."
+            exit 1
+          fi
 
-    - name: Stop Docker Container
-      run: docker stop $(docker ps -q)
+      - name: Stop Docker Container
+        run: docker stop $(docker ps -q)
