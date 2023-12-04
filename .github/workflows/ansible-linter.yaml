@@ -8,15 +8,11 @@ on:
 jobs:
   build:
     name: Ansible Lint
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: 3.13.0
-
       - name: Run ansible-lint
-        uses: ansible/ansible-lint@main
+        run: |
+          docker run --rm -v $(pwd):/playbook ansible/ansible-lint ansible-playbook /playbook/ansible-linter.yaml
