@@ -3,6 +3,10 @@
   hosts: monitoring_server
   become: true
 
+  collections:
+    - community.general
+    - community.grafana
+
   tasks:
     - name: Update apt cache
       ansible.builtin.apt:
@@ -74,8 +78,6 @@
         src: prometheus.yml.j2
         dest: /etc/prometheus/prometheus.yml
       notify: Reload Prometheus
-      become_user: root
-      become_method: ansible.builtin.sudo
 
   handlers:
     - name: Reload Prometheus
