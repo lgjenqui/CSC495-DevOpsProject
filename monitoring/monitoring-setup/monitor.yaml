@@ -69,7 +69,7 @@
         src: prometheus.yml.j2
         dest: /etc/prometheus/prometheus.yml
       notify: Reload Prometheus
-          become: true
+      become: true
       become_user: root
       become_method: sudo
       file:
