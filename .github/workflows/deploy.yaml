@@ -25,7 +25,7 @@ jobs:
           docker push lgjenqui/coffee-project:release
 
   release-deploy:
-    name: Begin Canary Deployment
+    name: Begin Deployment
     needs: build
     if: github.event.pull_request.merged == true
     runs-on: self-hosted
