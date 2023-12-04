@@ -22,5 +22,7 @@ jobs:
           if [ -z "$PLAYBOOK_PATH" ]; then
             echo "No Ansible playbook found."
           else
+            echo "Running ansible-lint on playbook: $PLAYBOOK_PATH"
+            echo "Current Directory: ${{ github.workspace }}"
             docker run --rm -v ${{ github.workspace }}:/playbook pipelinecomponents/ansible-lint ansible-playbook $PLAYBOOK_PATH
           fi
