@@ -72,7 +72,7 @@ jobs:
       - name: Deploy to Kubernetes cluster
         uses: Azure/k8s-deploy@v4
         with:
-          action: promote
+          action: deploy
           strategy: canary
           percentage: 33
           force: true
