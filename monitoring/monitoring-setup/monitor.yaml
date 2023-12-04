@@ -69,6 +69,8 @@
         src: prometheus.yml.j2
         dest: /etc/prometheus/prometheus.yml
       notify: Reload Prometheus
+      become_user: root
+      become_method: ansible.builtin.sudo
 
     - name: Set file mode for Prometheus configuration
       ansible.builtin.file:
