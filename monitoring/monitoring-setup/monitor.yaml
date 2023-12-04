@@ -69,6 +69,12 @@
         src: prometheus.yml.j2
         dest: /etc/prometheus/prometheus.yml
       notify: Reload Prometheus
+          become: true
+      become_user: root
+      become_method: sudo
+      file:
+        path: /etc/prometheus/prometheus.yml
+        mode: '0644'
 
   handlers:
     - name: Reload Prometheus
