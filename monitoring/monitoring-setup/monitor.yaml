@@ -22,7 +22,7 @@
       when: ansible_os_family == 'Debian'
 
     - name: Add Grafana APT repository
-      apt_repository:
+      ansible.builtin.apt_repository:
         repo: deb https://packages.grafana.com/oss/deb stable main
         state: present
       when: ansible_os_family == 'Debian'
@@ -38,24 +38,24 @@
       when: ansible_os_family == 'Debian'
 
     - name: Start and enable Prometheus service
-      systemd:
+      ansible.builtin.systemd:
         name: prometheus
         state: started
         enabled: yes
 
     - name: Start and enable Grafana service
-      systemd:
+      ansible.builtin.systemd:
         name: grafana-server
         state: started
         enabled: yes
 
     - name: Open port 9090 for Prometheus
-      ufw:
+      community.general.ufw:
         rule: allow
         port: 9090
 
     - name: Open port 3000 for Grafana
-      ufw:
+      community.general.ufw:
         rule: allow
         port: 3000
 
@@ -65,14 +65,14 @@
 
   tasks:
     - name: Update Prometheus configuration
-      template:
+      ansible.builtin.template:
         src: prometheus.yml.j2
         dest: /etc/prometheus/prometheus.yml
       notify: Reload Prometheus
 
   handlers:
     - name: Reload Prometheus
-      systemd:
+      ansible.builtin.systemd:
         name: prometheus
         state: reloaded
 
@@ -80,7 +80,7 @@
   hosts: localhost
   tasks:
     - name: Install Grafana Data Source
-      grafana_datasource:
+      community.grafana.grafana_datasource:
         name: Prometheus
         access: proxy
         url: http://143.198.68.194:3000/
@@ -88,3 +88,4 @@
         ds_type: prometheus
         ds_url: http://143.198.68.194:9090
       register: prometheus_datasource
+      
