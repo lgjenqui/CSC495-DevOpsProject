@@ -5,19 +5,19 @@
 
   tasks:
     - name: Update apt cache
-      apt:
+      ansible.builtin.apt:
         update_cache: yes
       when: ansible_os_family == 'Debian'
 
     - name: Install required packages
-      apt:
+      ansible.builtin.apt:
         name:
           - software-properties-common
           - unzip
       when: ansible_os_family == 'Debian'
 
     - name: Add Grafana APT repository key
-      apt_key:
+      ansible.builtin.apt_key:
         url: https://packages.grafana.com/gpg.key
       when: ansible_os_family == 'Debian'
 
@@ -28,12 +28,12 @@
       when: ansible_os_family == 'Debian'
 
     - name: Install Prometheus
-      apt:
+      ansible.builtin.apt:
         name: prometheus
       when: ansible_os_family == 'Debian'
 
     - name: Install Grafana
-      apt:
+      nsible.builtin.apt:
         name: grafana
       when: ansible_os_family == 'Debian'
 
