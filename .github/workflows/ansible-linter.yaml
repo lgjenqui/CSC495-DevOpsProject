@@ -16,4 +16,10 @@ jobs:
       - name: Run ansible-lint
         run: |
           docker pull pipelinecomponents/ansible-lint
-          docker run --rm -v ${{ github.workspace }}:/playbook pipelinecomponents/ansible-lint ansible-playbook /playbook/ansible-linter.yaml
+          PLAYBOOK_PATH=$(find . -type f -name "*.yaml" -o -name "*.yml" | head -n 1)
+          
+          if [ -z "$PLAYBOOK_PATH" ]; then
+            echo "No Ansible playbook found."
+          else
+            docker run --rm -v ${{ github.workspace }}:/playbook pipelinecomponents/ansible-lint ansible-playbook $PLAYBOOK_PATH
+          fi
