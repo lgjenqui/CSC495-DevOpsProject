@@ -64,15 +64,11 @@
   become: true
 
   tasks:
-    - name: Set file mode for Prometheus configuration
-      ansible.builtin.file:
-        path: /etc/prometheus/prometheus.yml
-        mode: '0600'
-
     - name: Update Prometheus configuration template
       ansible.builtin.template:
         src: prometheus.yml.j2
         dest: /etc/prometheus/prometheus.yml
+        mode: '0644'
       notify: Reload Prometheus
 
   handlers:
