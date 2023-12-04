@@ -47,9 +47,7 @@ jobs:
 
   canary-deploy:
     name: Begin Canary Deployment
-    needs: |
-      k8s-setup
-      build
+    needs: [k8s-setup, build]
     if: github.event.pull_request.merged == true
     runs-on: self-hosted
     steps:
