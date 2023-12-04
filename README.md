@@ -6,8 +6,9 @@
 1. Luke Jenquin, lgjenqui
 2. Sam Stone, sjstone3
 3. Jubitta John, jjohn6
-
+    
 ## DevOps Project 2023
+![](https://github.ncsu.edu/CSC519-lgjenqui-jjohn6-sjstone3/CSC519-Project/blob/update-readme/images/Dev%20Ops%20PipelineFinal.png?raw=true)
 Our project is a collection of Github workflows that automate the development and deployment of a "Coffee Maker" project. It runs a series of quality gate checks before allowing a developer to merge. Some notable features of the project is that it uses Kubernetes to perform a canary deployment, has monitoring with Prometheus and Grafana, and is setup to use feature flags with LaunchDarkly.
     
 ## File Structure:
