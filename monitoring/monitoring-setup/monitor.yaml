@@ -33,7 +33,7 @@
       when: ansible_os_family == 'Debian'
 
     - name: Install Grafana
-      nsible.builtin.apt:
+      ansible.builtin.apt:
         name: grafana
       when: ansible_os_family == 'Debian'
 
