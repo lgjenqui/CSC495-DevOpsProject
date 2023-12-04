@@ -1,4 +1,4 @@
-name: ansible linter
+name: Ansible Lint
 
 on:
   pull_request:
@@ -15,4 +15,5 @@ jobs:
 
       - name: Run ansible-lint
         run: |
-          docker run --rm -v $(pwd):/playbook ansible/ansible-lint ansible-playbook /playbook/ansible-linter.yaml
+          docker pull pipelinecomponents/ansible-lint
+          docker run --rm -v ${{ github.workspace }}:/playbook pipelinecomponents/ansible-lint ansible-playbook /playbook/ansible-linter.yaml
