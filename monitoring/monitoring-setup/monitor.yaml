@@ -6,7 +6,7 @@
   tasks:
     - name: Update apt cache
       ansible.builtin.apt:
-        update_cache: yes
+        update_cache: true
       when: ansible_os_family == 'Debian'
 
     - name: Install required packages
@@ -41,13 +41,13 @@
       ansible.builtin.systemd:
         name: prometheus
         state: started
-        enabled: yes
+        enabled: true
 
     - name: Start and enable Grafana service
       ansible.builtin.systemd:
         name: grafana-server
         state: started
-        enabled: yes
+        enabled: true
 
     - name: Open port 9090 for Prometheus
       community.general.ufw:
@@ -88,4 +88,3 @@
         ds_type: prometheus
         ds_url: http://143.198.68.194:9090
       register: prometheus_datasource
-      
