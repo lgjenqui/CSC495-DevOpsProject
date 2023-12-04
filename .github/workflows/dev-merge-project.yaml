@@ -64,7 +64,7 @@ jobs:
         run: |
           docker pull pipelinecomponents/ansible-lint
           PLAYBOOK_PATH=$(find . -type f -name "*.yaml" -o -name "*.yml" | head -n 1)
-          
+
           if [ -z "$PLAYBOOK_PATH" ]; then
             echo "No Ansible playbook found."
           else
@@ -96,7 +96,7 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-  
+
   check-app-health:
     runs-on: self-hosted
 

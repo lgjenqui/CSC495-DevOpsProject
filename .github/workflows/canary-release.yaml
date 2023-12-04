@@ -16,19 +16,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
+
       - name: Give sudo permissions
         run: sudo usermod -a -G docker root
-      
+
       - name: Build Docker image
         working-directory: canary
         run: docker build -t setup-k8s .
-        
+
       - name: Run Docker container
         run: |
          docker run -v /root/.ssh:/root/.ssh/ project ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml
 
-  build:
+  canary-deploy:
     name: Build canary Docker Image and push to Docker Hub
     if: github.event.pull_request.merged == true
     runs-on: self-hosted

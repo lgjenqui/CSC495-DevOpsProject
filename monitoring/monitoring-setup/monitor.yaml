@@ -3,10 +3,6 @@
   hosts: monitoring_server
   become: true
 
-  collections:
-    - community.general
-    - community.grafana
-
   tasks:
     - name: Update apt cache
       ansible.builtin.apt:
