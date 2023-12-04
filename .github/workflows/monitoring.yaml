@@ -35,6 +35,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '👋 View the Monitoring Dashboard Here! [Monitoring Dashboard](http://143.244.179.253:3000/d/dw2aBiqkz/mydashboard?'
-              'orgId=1&from=1701619246701&to=1701640846701)'
+              body: '👋 View the Monitoring Dashboard Here! [Monitoring Dashboard](http://143.244.179.253:3000/d/dw2aBiqkz/mydashboard?orgId=1&from=1701619246701&to=1701640846701)'
             })
