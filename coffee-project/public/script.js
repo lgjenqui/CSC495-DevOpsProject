@@ -1,3 +1,5 @@
+/* global axios */
+
 document.addEventListener('DOMContentLoaded', () => {
     axios.get('/coffees')
         .then(response => {
