@@ -17,13 +17,14 @@ jobs:
         working-directory: ${{ github.workspace }}
         run: |
           docker pull pipelinecomponents/ansible-lint
-          PLAYBOOK_PATH=$(find ${{ github.workspace }} -type f -name "*.yaml" -o -name "*.yml" | head -n 1)
+          PLAYBOOK_PATH=$(find . -type f -name "*.yaml" -o -name "*.yml" | head -n 1)
           
           if [ -z "$PLAYBOOK_PATH" ]; then
             echo "No Ansible playbook found."
           else
-            echo "Running ansible-lint on playbook: $PLAYBOOK_PATH"
+            PLAYBOOK_PATH_RELATIVE=$(realpath --relative-to=${{ github.workspace }} $PLAYBOOK_PATH)
+            echo "Running ansible-lint on playbook: /playbook/${PLAYBOOK_PATH_RELATIVE}"
             echo "Current Directory: ${{ github.workspace }}"
             echo ls ${{ github.workspace }}
-            docker run --rm -v ${{ github.workspace }}:/playbook pipelinecomponents/ansible-lint ansible-playbook $PLAYBOOK_PATH
+            docker run --rm -v ${{ github.workspace }}:/playbook pipelinecomponents/ansible-lint ansible-playbook /playbook/${PLAYBOOK_PATH_RELATIVE}
           fi
