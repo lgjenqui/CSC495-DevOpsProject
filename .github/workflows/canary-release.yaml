@@ -28,7 +28,7 @@ jobs:
         run: |
          docker run -v /root/.ssh:/root/.ssh/ project ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml
 
-  canary-deploy:
+  build:
     name: Build canary Docker Image and push to Docker Hub
     if: github.event.pull_request.merged == true
     runs-on: self-hosted
